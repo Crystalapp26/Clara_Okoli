@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara Ihuoma Okoli · GIS Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0b1e2e;
+            line-height: 1.6;
+        }
+        :root {
+            --primary: #0b3b5c;
+            --primary-light: #1e6f9f;
+            --accent: #2e9b6b;
+            --accent-soft: #d2f0e0;
+            --gray-bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-dark: #0b1e2e;
+            --text-muted: #475569;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 { font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        h3 { font-size: 1.3rem; margin-bottom: 0.25rem; }
+        .section-label {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent); font-weight: 600; margin-bottom: 8px;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        header {
+            background: white; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; padding: 12px 0;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.4rem; color: var(--primary); letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.95rem; font-weight: 500; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary-light); }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block; padding: 12px 28px; border-radius: 40px; font-weight: 500;
+            text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-size: 0.95rem;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-outline { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+
+        /* ===== HERO SECTION ===== */
+        .hero { padding: 60px 0 80px; background: linear-gradient(135deg, #f0f7fc 0%, #ffffff 100%); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 0.8fr; gap: 60px; align-items: center; }
+        .hero-content h1 { font-size: 3rem; color: var(--primary); margin-bottom: 16px; }
+        .hero-content .subhead { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; }
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+        .hero-tags span {
+            background: var(--accent-soft); color: #0a5c3e; padding: 6px 16px;
+            border-radius: 30px; font-size: 0.85rem; font-weight: 500;
+        }
+        .hero-image { display: flex; justify-content: center; }
+        .profile-pic {
+            width: 320px; height: 320px; border-radius: 50%; object-fit: cover;
+            border: 6px solid white; box-shadow: var(--shadow-md); background: #e2e8f0;
+        }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 70px 0; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 50px; }
+        .section-header h2 { color: var(--primary); }
+        .section-header p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* ===== SKILLS GRID ===== */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+        .skill-card {
+            background: white; padding: 18px 20px; border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+            display: flex; align-items: center; gap: 14px; transition: all 0.2s;
+        }
+        .skill-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .skill-icon { font-size: 1.4rem; color: var(--primary-light); width: 28px; text-align: center; }
+        .skill-card span { font-weight: 500; font-size: 0.95rem; }
+
+        /* ===== EXPERIENCE ===== */
+        .exp-list { display: flex; flex-direction: column; gap: 24px; }
+        .exp-item {
+            background: white; padding: 28px; border-radius: var(--radius);
+            box-shadow: var(--shadow-sm); border-left: 5px solid var(--accent); transition: transform 0.2s;
+        }
+        .exp-item:hover { transform: translateX(4px); }
+        .exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px; }
+        .exp-header h3 { color: var(--primary); font-size: 1.2rem; }
+        .exp-date {
+            background: var(--gray-bg); padding: 4px 14px; border-radius: 30px;
+            font-size: 0.8rem; font-weight: 500; color: var(--text-muted);
+        }
+        .exp-company { font-weight: 500; color: var(--accent); margin-bottom: 12px; font-size: 0.95rem; }
+        .exp-item ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .exp-item ul li { position: relative; padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; }
+        .exp-item ul li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+        /* ===== GALLERY ===== */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .gallery-item {
+            background: white; border-radius: var(--radius-sm); overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: all 0.25s;
+            border: 1px solid var(--border-light); cursor: pointer;
+        }
+        .gallery-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+        .gallery-item img {
+            width: 100%; height: 220px; object-fit: cover; display: block;
+            background: #f1f5f9; transition: transform 0.3s;
+        }
+        .gallery-item:hover img { transform: scale(1.02); }
+        .gallery-caption {
+            padding: 16px 18px; font-weight: 500; font-size: 0.9rem;
+            color: var(--primary); border-top: 1px solid var(--border-light);
+        }
+
+        /* ===== CERTIFICATES ===== */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+        .cert-card {
+            background: white; border-radius: var(--radius-sm); overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: all 0.25s;
+            border: 1px solid var(--border-light); cursor: pointer;
+            display: flex; flex-direction: column;
+        }
+        .cert-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+        .cert-card img {
+            width: 100%; height: 180px; object-fit: cover; display: block;
+            background: #f1f5f9; transition: transform 0.3s;
+        }
+        .cert-card:hover img { transform: scale(1.02); }
+        .cert-info { padding: 16px 18px; flex-grow: 1; display: flex; flex-direction: column; }
+        .cert-info h4 { font-size: 1rem; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
+        .cert-info .cert-issuer { font-size: 0.85rem; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+        .cert-info .cert-date { font-size: 0.8rem; color: var(--text-muted); margin-top: auto; }
+
+        /* ===== TRAINING LIST ===== */
+        .training-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .training-item {
+            background: white; padding: 18px 20px; border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm); border-left: 4px solid var(--primary-light);
+            transition: transform 0.2s;
+        }
+        .training-item:hover { transform: translateX(4px); }
+        .training-item .train-year {
+            font-size: 0.75rem; font-weight: 600; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .training-item .train-title { font-weight: 600; font-size: 0.95rem; color: var(--primary); margin: 4px 0 2px; }
+        .training-item .train-org { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ===== EDUCATION ===== */
+        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .edu-card {
+            background: white; padding: 28px; border-radius: var(--radius);
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+        }
+        .edu-card h3 { color: var(--primary); font-size: 1.15rem; }
+        .edu-card .institution { color: var(--accent); font-weight: 500; font-size: 0.95rem; margin: 4px 0 8px; }
+        .edu-card .date {
+            display: inline-block; background: var(--gray-bg); padding: 3px 14px;
+            border-radius: 30px; font-size: 0.8rem; font-weight: 500; color: var(--text-muted); margin-bottom: 12px;
+        }
+        .edu-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ===== FOOTER ===== */
+        footer { background: var(--primary); color: white; padding: 50px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
+        .footer-brand p { color: #b8d4e8; max-width: 300px; font-size: 0.95rem; }
+        .footer-links h4 { font-size: 1rem; margin-bottom: 16px; color: #b8d4e8; text-transform: uppercase; letter-spacing: 0.08em; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links ul li a { color: white; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; opacity: 0.85; }
+        .footer-links ul li a:hover { opacity: 1; color: var(--accent-soft); }
+        .footer-links ul li i { margin-right: 8px; width: 18px; color: var(--accent-soft); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.85rem; color: #b8d4e8;
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
+            z-index: 1000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            max-width: 1200px; max-height: 90vh; position: relative;
+            background: white; border-radius: var(--radius); overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+        .modal-content img { width: 100%; height: auto; max-height: 80vh; object-fit: contain; display: block; background: #0b1e2e; }
+        .modal-close {
+            position: absolute; top: 15px; right: 20px; font-size: 2.2rem; color: white;
+            cursor: pointer; line-height: 1; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s; z-index: 10;
+        }
+        .modal-close:hover { transform: scale(1.15); }
+        .modal-caption { padding: 14px 20px; background: white; color: var(--primary); font-weight: 500; font-size: 1rem; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-content h1 { font-size: 2.4rem; }
+            .hero-content .subhead { margin-left: auto; margin-right: auto; }
+            .hero-tags { justify-content: center; }
+            .profile-pic { width: 240px; height: 240px; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+        }
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 1.9rem; }
+            h2 { font-size: 1.6rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .cert-grid { grid-template-columns: 1fr; }
+            .exp-header { flex-direction: column; gap: 6px; }
+            .profile-pic { width: 200px; height: 200px; }
+            .container { padding: 0 16px; }
+            section { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">CLARA<span>.</span></div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#gallery">Maps</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Clara Ihuoma Okoli</h1>
+                    <p class="subhead">
+                        GIS Analyst with 4+ years of experience supporting geospatial data systems,
+                        spatial analysis, and data management for environmental and infrastructure projects.
+                    </p>
+                    <div class="hero-tags">
+                        <span>ArcGIS Pro</span>
+                        <span>Spatial Analysis</span>
+                        <span>QA/QC</span>
+                        <span>Cartography</span>
+                        <span>Geodatabases</span>
+                        <span>SQL</span>
+                        <span>Remote Sensing</span>
+                    </div>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="#gallery" class="btn btn-primary">View Map Portfolio</a>
+                        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- Profile picture: replace with your actual file path -->
+                    <img src="images/profile.jpg" alt="Clara Ihuoma Okoli" class="profile-pic" id="profilePic">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Capabilities</div>
+                <h2>Professional Skills</h2>
+                <p>Core competencies refined across environmental, infrastructure, and research projects.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fas fa-map skill-icon"></i><span>ArcGIS Pro & ArcMap</span></div>
+                <div class="skill-card"><i class="fas fa-globe skill-icon"></i><span>ArcGIS Online / Portal</span></div>
+                <div class="skill-card"><i class="fas fa-layer-group skill-icon"></i><span>Spatial Analysis & Geoprocessing</span></div>
+                <div class="skill-card"><i class="fas fa-check-circle skill-icon"></i><span>Data Validation & QA/QC</span></div>
+                <div class="skill-card"><i class="fas fa-paint-brush skill-icon"></i><span>Cartographic Design</span></div>
+                <div class="skill-card"><i class="fas fa-chart-pie skill-icon"></i><span>ArcGIS Dashboards & StoryMaps</span></div>
+                <div class="skill-card"><i class="fas fa-satellite skill-icon"></i><span>Satellite Imagery Analysis</span></div>
+                <div class="skill-card"><i class="fas fa-leaf skill-icon"></i><span>Google Earth Engine</span></div>
+                <div class="skill-card"><i class="fas fa-database skill-icon"></i><span>SQL & Data Querying</span></div>
+                <div class="skill-card"><i class="fas fa-map-marked-alt skill-icon"></i><span>Geodatabases & Coordinate Systems</span></div>
+                <div class="skill-card"><i class="fas fa-exchange-alt skill-icon"></i><span>Data Conversion & Integration</span></div>
+                <div class="skill-card"><i class="fas fa-users skill-icon"></i><span>Stakeholder Engagement</span></div>
+                <div class="skill-card"><i class="fas fa-file-excel skill-icon"></i><span>Microsoft Excel (Advanced)</span></div>
+                <div class="skill-card"><i class="fas fa-project-diagram skill-icon"></i><span>GIS Workflow Development</span></div>
+                <div class="skill-card"><i class="fas fa-draw-polygon skill-icon"></i><span>QGIS & CAD</span></div>
+                <div class="skill-card"><i class="fab fa-python skill-icon"></i><span>Python (in training)</span></div>
+                <div class="skill-card"><i class="fas fa-water skill-icon"></i><span>Flood Modeller</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Career</div>
+                <h2>Work Experience</h2>
+                <p>Delivering geospatial solutions across environmental, infrastructure, and research contexts.</p>
+            </div>
+            <div class="exp-list">
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3>GIS / Data Analyst</h3>
+                        <span class="exp-date">Jan 2024 – Dec 2024</span>
+                    </div>
+                    <div class="exp-company">Indepth Geospatial Ltd · Port Harcourt, Nigeria</div>
+                    <ul>
+                        <li>Supported GIS systems and workflows for environmental and infrastructure projects.</li>
+                        <li>Created, managed, and validated geospatial datasets ensuring high QA/QC standards.</li>
+                        <li>Produced high-quality GIS outputs and maps for internal teams and external stakeholders.</li>
+                        <li>Collaborated with multidisciplinary teams (designers, environmental specialists, field teams).</li>
+                        <li>Converted spatial data between formats to support GIS, CAD, and project requirements.</li>
+                        <li>Delivered GIS data to stakeholders in line with project specifications and deadlines.</li>
+                        <li>Supported users with GIS queries and improved workflow efficiency.</li>
+                    </ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3>Freelance GIS & Spatial Data Consultant</h3>
+                        <span class="exp-date">Jan 2020 – Dec 2023</span>
+                    </div>
+                    <div class="exp-company">Crytalapp Solution · Port Harcourt, Nigeria</div>
+                    <ul>
+                        <li>Delivered spatial analysis and data visualisation for multiple environmental projects.</li>
+                        <li>Supported research teams with geospatial modelling, satellite imagery analysis, and reporting.</li>
+                        <li>Translated complex spatial datasets into clear visuals for non-technical audiences.</li>
+                        <li>Engaged with clients to deliver GIS outputs tailored to project needs.</li>
+                        <li>Developed innovative GIS solutions to improve data visualization and reporting.</li>
+                    </ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3>GIS / Data Analyst Intern</h3>
+                        <span class="exp-date">Jun 2019 – Jan 2020</span>
+                    </div>
+                    <div class="exp-company">Degree Group Limited · Abuja, Nigeria</div>
+                    <ul>
+                        <li>Completed data cleaning and validation of spreadsheets to promote robust data management.</li>
+                        <li>Performed routine tasks under direct supervision and within established procedures.</li>
+                        <li>Attended workshops and seminars to remain current on computer applications.</li>
+                        <li>Utilized data visualization techniques to present and explain complex data sets.</li>
+                        <li>Analyzed data to identify root causes and recommend corrective actions.</li>
+                        <li>Identified, analyzed, and interpreted trends or patterns in complex data sets.</li>
+                        <li>Supported data quality assurance and validation processes to maintain data integrity.</li>
+                    </ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3>Intern</h3>
+                        <span class="exp-date">Sep 2019 – Dec 2019</span>
+                    </div>
+                    <div class="exp-company">Auspicious Quarry Co. Ltd · Kubwa, Abuja</div>
+                    <ul>
+                        <li>Assisted quarry operations: monitoring equipment, inspecting sites, ensuring safety compliance.</li>
+                        <li>Contributed to data collection: recording production metrics, analyzing geological data.</li>
+                        <li>Worked with maintenance teams on routine inspections and basic repairs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section id="gallery" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Portfolio</div>
+                <h2>Map Gallery</h2>
+                <p>Selected cartographic and spatial analysis outputs. Click any map to enlarge.</p>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Populated dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATES & TRAININGS ===== -->
+    <section id="certificates">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Credentials</div>
+                <h2>Certificates & Trainings</h2>
+                <p>Professional development and certifications in geospatial science, data management, and computing.</p>
+            </div>
+
+            <!-- Certificate Cards (with images) -->
+            <div class="cert-grid" id="certGrid">
+                <!-- Populated dynamically by JS -->
+            </div>
+
+            <!-- Additional Trainings (text-only list) -->
+            <h3 style="color: var(--primary); margin: 50px 0 20px; font-size: 1.3rem;">Conference & Workshop Participation</h3>
+            <div class="training-list" id="trainingList">
+                <!-- Populated dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Academic</div>
+                <h2>Education</h2>
+                <p>Formal training in environmental management and geosciences.</p>
+            </div>
+            <div class="edu-grid">
+                <div class="edu-card">
+                    <h3>Master's in Environmental Management</h3>
+                    <div class="institution">Glasgow Caledonian University · Glasgow, UK</div>
+                    <div class="date">2026 (expected)</div>
+                    <p><strong>Dissertation:</strong> Evaluating the Environmental Footprint of Large Retail Stores: Implications for Neighbouring Aquatic Ecosystems.</p>
+                </div>
+                <div class="edu-card">
+                    <h3>BSc in Geology (Second Class Upper)</h3>
+                    <div class="institution">University of Port Harcourt · Rivers State, Nigeria</div>
+                    <div class="date">2021</div>
+                    <p><strong>Thesis:</strong> Effects of stream bank instability of Aleto stream on engineering structures in Aleto, Eleme, Rivers State.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER / CONTACT ===== -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Clara Ihuoma Okoli</h3>
+                    <p>GIS Analyst · Environmental Management · Geospatial Solutions</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-map-pin"></i> Glasgow, UK</li>
+                        <li><i class="fas fa-phone-alt"></i> 07925 487781</li>
+                        <li><i class="fas fa-envelope"></i> claraokoli88@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#gallery">Map Gallery</a></li>
+                        <li><a href="#certificates">Certificates</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Clara Ihuoma Okoli. All rights reserved.</span>
+                <span>Built with <i class="fas fa-heart" style="color: #f472b6;"></i> for geospatial storytelling.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <img id="modalImage" src="" alt="Preview">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ===== MAP GALLERY DATA =====
+            const maps = [
+                { src: "images/afikpo-sample-map.jpg", caption: "Afikpo South – Sample Points, Drainage & Roads" },
+                { src: "images/afikpo-labeled-map.jpg", caption: "Afikpo South – Water, Rock, Soil, Animal & Vegetable Sample Locations" },
+                { src: "images/obio-akpor-map.jpg", caption: "Obio/Akpor – Sample Points & Drainage Network" },
+                { src: "images/eleme-location-map.jpg", caption: "Location Map of Eleme, Rivers State – Sample Points & Highway" },
+                { src: "images/ebonyi-geology-map.jpg", caption: "Ebonyi State – Geological Map with Sample Points" },
+                { src: "images/ebonyi-geology-river.jpg", caption: "Ebonyi State – Geological Map with River & Sample Points" },
+                { src: "images/ebonyi-water-samples.jpg", caption: "Ebonyi State – Water Samples & Major Roads" },
+                { src: "images/ebonyi-geology-water.jpg", caption: "Ebonyi State – Geological Units & Water Sample Locations" },
+                { src: "images/ebonyi-water-geology.jpg", caption: "Ebonyi State – Water Samples over Asu River Group" },
+                { src: "images/ebonyi-geology-dip.jpg", caption: "Ebonyi State – Geological Map with DIP & Water Samples" },
+                { src: "images/ebonyi-water-final.jpg", caption: "Ebonyi State – Water Samples & Drainage Network" },
+                { src: "images/ebonyi-geology-labels.jpg", caption: "Ebonyi State – Geological Formations & Sample Points" },
+                { src: "images/abia-owaza-map.jpg", caption: "Owaza, Abia State – Pipeline, Spill Points & Sample Locations" },
+                { src: "images/water-samples-ebonyi.jpg", caption: "Ebonyi State – Water Samples & Quarry Locations" },
+                { src: "images/ebonyi-geology-water-2.jpg", caption: "Ebonyi State – Geological Map with Water Samples & Roads" },
+                { src: "images/ebonyi-water-geology-2.jpg", caption: "Ebonyi State – Water Samples over Geological Units" },
+                { src: "images/ebonyi-geology-dip-2.jpg", caption: "Ebonyi State – Geological Map with DIP & Water Samples" },
+                { src: "images/ebonyi-water-final-2.jpg", caption: "Ebonyi State – Water Samples & Drainage" },
+                { src: "images/ebonyi-geology-labels-2.jpg", caption: "Ebonyi State – Geological Formations & Sample Points" },
+                { src: "images/study-location-map.jpg", caption: "Study Location Map – Nigeria Context & Omoku Town" },
+                { src: "images/river-creeks-anambra.jpg", caption: "River Creeks in Nigeria with Reference to Anambra State" },
+                { src: "images/abia-owaza-pipeline.jpg", caption: "Owaza, Abia State – Pipeline & Spill Points" },
+                { src: "images/water-samples-locations.jpg", caption: "Water Samples – Locations & Drainage" },
+                { src: "images/ebonyi-geology-water-3.jpg", caption: "Ebonyi State – Geological Map & Water Samples" },
+                { src: "images/ebonyi-water-geology-3.jpg", caption: "Ebonyi State – Water Samples over Asu River Group" },
+                { src: "images/ebonyi-geology-dip-3.jpg", caption: "Ebonyi State – Geological Map with DIP & Water Samples" }
+            ];
+
+            // ===== CERTIFICATES DATA (with images) =====
+            const certificates = [
+                {
+                    src: "images/esri-cert.jpg",
+                    title: "Spatial Data Science: The New Frontier in Analytics",
+                    issuer: "Esri",
+                    date: "Completed Oct 11, 2024 · 6 weeks"
+                },
+                {
+                    src: "images/udemy-dbms.jpg",
+                    title: "Database Management System Excellence: Module 2",
+                    issuer: "Udemy",
+                    date: "Completed Oct 8, 2024 · 1 hour"
+                },
+                {
+                    src: "images/udemy-excel-1.jpg",
+                    title: "Excel – Microsoft Excel Course Beginner to Expert 2024",
+                    issuer: "Udemy",
+                    date: "Completed Oct 8, 2024 · 4 hours"
+                },
+                {
+                    src: "images/udemy-excel-2.jpg",
+                    title: "Excel for Everyone: Essential Skills for Work and Life",
+                    issuer: "Udemy",
+                    date: "Completed Oct 7, 2024 · 4 hours"
+                }
+            ];
+
+            // ===== ADDITIONAL TRAININGS (text-only) =====
+            const trainings = [
+                { year: "2018-11", title: "Certificate of Participation in 36th Annual International Conference and Exhibition", org: "Nigerian Association of Petroleum Explorationists (NAPE)" },
+                { year: "2019-08", title: "Professional Training on GIS Functionalities, Spatial Analytics and Data Visualization", org: "Degree Group Limited" },
+                { year: "2019-10", title: "Python Bootcamp", org: "Nigerian Association of Petroleum Explorationists (NAPE)" },
+                { year: "2020-03", title: "55th Annual National Conference", org: "Nigerian Mining and Geoscience Society (NMGS)" },
+                { year: "2021-09", title: "3rd Joint Mini Conference", org: "NAPE / NMGS" },
+                { year: "2022-03", title: "57th Annual National Conference", org: "Nigerian Mining and Geoscience Society (NMGS)" },
+                { year: "2023-11", title: "Certificate of Participation in 41st Annual International Conference and Exhibition", org: "Nigerian Association of Petroleum Explorationists (NAPE)" },
+                { year: "2022-2023", title: "Certificate of Participation in Youth Corps Programme", org: "National Youth Service Corps (NYSC)" }
+            ];
+
+            // ===== RENDER MAP GALLERY =====
+            const galleryGrid = document.getElementById('galleryGrid');
+            maps.forEach((map) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+
+                const img = document.createElement('img');
+                img.src = map.src;
+                img.alt = map.caption;
+                img.loading = 'lazy';
+                img.onerror = function() {
+                    this.src = 'https://placehold.co/600x400/e2e8f0/475569?text=Map+Preview';
+                };
+
+                const caption = document.createElement('div');
+                caption.className = 'gallery-caption';
+                caption.textContent = map.caption;
+
+                item.appendChild(img);
+                item.appendChild(caption);
+                galleryGrid.appendChild(item);
+
+                item.addEventListener('click', () => openModal(map.src, map.caption));
+            });
+
+            // ===== RENDER CERTIFICATES =====
+            const certGrid = document.getElementById('certGrid');
+            certificates.forEach((cert) => {
+                const card = document.createElement('div');
+                card.className = 'cert-card';
+
+                const img = document.createElement('img');
+                img.src = cert.src;
+                img.alt = cert.title;
+                img.loading = 'lazy';
+                img.onerror = function() {
+                    this.src = 'https://placehold.co/600x400/e2e8f0/475569?text=Certificate';
+                };
+
+                const info = document.createElement('div');
+                info.className = 'cert-info';
+                info.innerHTML = `
+                    <h4>${cert.title}</h4>
+                    <div class="cert-issuer">${cert.issuer}</div>
+                    <div class="cert-date">${cert.date}</div>
+                `;
+
+                card.appendChild(img);
+                card.appendChild(info);
+                certGrid.appendChild(card);
+
+                card.addEventListener('click', () => openModal(cert.src, `${cert.title} — ${cert.issuer}`));
+            });
+
+            // ===== RENDER ADDITIONAL TRAININGS =====
+            const trainingList = document.getElementById('trainingList');
+            trainings.forEach((t) => {
+                const item = document.createElement('div');
+                item.className = 'training-item';
+                item.innerHTML = `
+                    <div class="train-year">${t.year}</div>
+                    <div class="train-title">${t.title}</div>
+                    <div class="train-org">${t.org}</div>
+                `;
+                trainingList.appendChild(item);
+            });
+
+            // ===== MODAL LOGIC =====
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const modalClose = document.getElementById('modalClose');
+
+            function openModal(src, caption) {
+                modalImage.src = src;
+                modalImage.alt = caption;
+                modalCaption.textContent = caption;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                modalImage.src = '';
+            }
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // ===== PROFILE PICTURE FALLBACK =====
+            const profilePic = document.getElementById('profilePic');
+            profilePic.onerror = function() {
+                this.src = 'https://placehold.co/400x400/0b3b5c/ffffff?text=Clara+Ihuoma+Okoli';
+            };
+        })();
+    </script>
+
+</body>
+</html>
