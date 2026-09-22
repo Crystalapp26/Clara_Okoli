@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="GeoTools — practical GIS, remote sensing and data analysis tools in your browser.">
+<title>GeoTools | GIS & Data Toolkit</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav"><a class="brand" href="#home"><span class="brand-mark">G</span> GeoTools</a><nav><a href="#tools">Tools</a><a href="#about">About</a></nav><a class="nav-cta" href="#tools">Start using tools →</a></header>
+<main>
+<section id="home" class="hero"><div class="hero-copy"><p class="eyebrow">GIS • REMOTE SENSING • DATA</p><h1>Useful geospatial tools.<br><span>Right in your browser.</span></h1><p class="hero-text">A simple toolkit for students, GIS analysts and curious minds. Calculate distances, explore NDVI values, convert coordinates and inspect CSV datasets without installing software.</p><div class="hero-actions"><a class="button primary" href="#tools">Explore the toolkit</a><a class="button secondary" href="#about">How it works</a></div></div><div class="hero-card"><div class="map-grid"></div><div class="map-pin pin-a">A</div><div class="map-pin pin-b">B</div><div class="route"></div><div class="hero-card-label"><strong>GEOSPATIAL TOOLKIT</strong><small>Fast • Free • Browser-based</small></div></div></section>
+<section id="tools" class="section"><div class="section-heading"><div><p class="eyebrow">THE TOOLKIT</p><h2>Four tools to get you moving</h2></div><p>Everything runs locally in your browser. Your data isn't uploaded to a server.</p></div>
+<div class="tool-grid">
+<article class="tool-card"><div class="tool-icon">↔</div><h3>Distance Calculator</h3><p>Calculate great-circle distance between two latitude/longitude points.</p><div class="inputs two"><label>Point A latitude<input id="lat1" type="number" step="any" placeholder="55.8642"></label><label>Point A longitude<input id="lon1" type="number" step="any" placeholder="-4.2518"></label><label>Point B latitude<input id="lat2" type="number" step="any" placeholder="55.9533"></label><label>Point B longitude<input id="lon2" type="number" step="any" placeholder="-3.1883"></label></div><button class="button primary full" onclick="calculateDistance()">Calculate distance</button><div id="distanceResult" class="result">Enter two points to calculate.</div></article>
+<article class="tool-card"><div class="tool-icon">◈</div><h3>NDVI Calculator</h3><p>Calculate Normalized Difference Vegetation Index from Red and NIR reflectance.</p><div class="inputs"><label>Red band value<input id="red" type="number" step="any" placeholder="0.12"></label><label>NIR band value<input id="nir" type="number" step="any" placeholder="0.62"></label></div><button class="button primary full" onclick="calculateNDVI()">Calculate NDVI</button><div id="ndviResult" class="result">NDVI = (NIR − Red) / (NIR + Red)</div></article>
+<article class="tool-card"><div class="tool-icon">⌁</div><h3>Coordinate Converter</h3><p>Convert decimal degrees into degrees, minutes and seconds.</p><div class="inputs"><label>Decimal latitude<input id="decimalLat" type="number" step="any" placeholder="55.8642"></label><label>Decimal longitude<input id="decimalLon" type="number" step="any" placeholder="-4.2518"></label></div><button class="button primary full" onclick="convertCoordinates()">Convert</button><div id="coordResult" class="result">Your DMS coordinates will appear here.</div></article>
+<article class="tool-card"><div class="tool-icon">▤</div><h3>CSV Quick Stats</h3><p>Load a CSV locally and get row count, column names and numeric summaries.</p><label class="file-label">Choose CSV file<input id="csvFile" type="file" accept=".csv,text/csv" onchange="readCSV(event)"></label><div id="csvResult" class="result">No file selected.</div></article>
+</div></section>
+<section class="feature-strip"><div><strong>01</strong><span>Learn by doing</span><p>Small tools that make GIS concepts easier to understand.</p></div><div><strong>02</strong><span>Browser based</span><p>No installation or account required for the core tools.</p></div><div><strong>03</strong><span>Privacy first</span><p>Calculations happen on your device in this version.</p></div></section>
+<section id="about" class="about"><div><p class="eyebrow">ABOUT GEOTOOLS</p><h2>Built as a practical GIS learning space.</h2></div><div class="about-copy"><p>GeoTools is designed around a simple idea: GIS skills become more useful when you can experiment with them quickly. The site combines small geospatial calculators with data-analysis utilities in one clean workspace.</p><p>Use it for coursework, portfolio projects, quick checks, teaching demonstrations or just learning how common GIS calculations work.</p><a href="#tools" class="text-link">Try a tool →</a></div></section>
+</main>
+<footer><div><strong>GeoTools</strong><span>GIS • Data • Learning</span></div><p>© 2026 GeoTools. Built for learning and practical analysis.</p></footer>
+<script src="script.js"></script>
+</body></html>
